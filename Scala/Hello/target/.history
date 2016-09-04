@@ -1,0 +1,10 @@
+import study.Lecture1
+import hello.study.Lecture1
+console
+sbt test
+test
+esit
+exit
+testOnly study.Lecture1
+exit
+console
