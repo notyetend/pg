@@ -1,14 +1,20 @@
-name := "sparkpj"
+name := "SparkTwoExperiments"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.10.4"
 
+val sparkVersion = "2.0.0"
+
+
+resolvers ++= Seq(
+  "apache-snapshots" at "http://repository.apache.org/snapshots/"
+)
 
 libraryDependencies ++= Seq(
-  // Spark dependency
-  "org.apache.spark" % "spark-core_2.10" % "1.2.0" % "provided",
-  // Third-party libraries
-  "net.sf.jopt-simple" % "jopt-simple" % "4.3",
-  "joda-time" % "joda-time" % "2.0"
+  "org.apache.spark" %% "spark-core" % sparkVersion,
+  "org.apache.spark" %% "spark-sql" % sparkVersion,
+  "org.apache.spark" %% "spark-mllib" % sparkVersion,
+  "org.apache.spark" %% "spark-streaming" % sparkVersion,
+  "org.apache.spark" %% "spark-hive" % sparkVersion
 )

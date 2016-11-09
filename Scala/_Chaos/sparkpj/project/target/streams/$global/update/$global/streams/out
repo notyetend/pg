@@ -1,4 +1,4 @@
-[0m[[0minfo[0m] [0mUpdating {file:/C:/My/Playground/Git/pg/Scala/_Chaos/sparkpj/project/}sparkpj-build...[0m
+[0m[[0minfo[0m] [0mUpdating {file:/D:/_PlayGround/Github/pg/Scala/_Chaos/sparkpj/project/}sparkpj-build...[0m
 [0m[[0mdebug[0m] [0m:: resolving dependencies :: default#sparkpj-build;0.1-SNAPSHOT[0m
 [0m[[0mdebug[0m] [0m	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool][0m
 [0m[[0mdebug[0m] [0m	validate = true[0m
@@ -16,7 +16,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#sparkpj-build;0.1-SNAPSHOT [provided][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#sparkpj-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.10.4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@7e1f9862[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4e3073a2[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.10.4 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m	[2.10.4] org.scala-lang#scala-library;2.10.4[0m
@@ -1766,19 +1766,19 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.8!apply-macro.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 3544ms :: artifacts dl 180ms[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT compile produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-compile.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT runtime produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-runtime.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT test produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-test.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT provided produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-provided.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT optional produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-optional.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT compile-internal produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-compile-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT runtime-internal produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-runtime-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT test-internal produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-test-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT plugin produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-plugin.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT sources produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-sources.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT docs produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-docs.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT pom produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-pom.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT scala-tool produced in C:\My\Playground\Git\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (3544ms resolve - 180ms download)[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 1058ms :: artifacts dl 53ms[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT compile produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-compile.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT runtime produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-runtime.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT test produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-test.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT provided produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-provided.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT optional produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-optional.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT compile-internal produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-compile-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT runtime-internal produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-runtime-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT test-internal produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-test-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT plugin produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-plugin.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT sources produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-sources.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT docs produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-docs.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT pom produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-pom.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#sparkpj-build;0.1-SNAPSHOT scala-tool produced in D:\_PlayGround\Github\pg\Scala\_Chaos\sparkpj\project\target\resolution-cache\reports\default-sparkpj-build-scala-tool.xml[0m
+[0m[[0mdebug[0m] [0m	resolve done (1058ms resolve - 53ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
