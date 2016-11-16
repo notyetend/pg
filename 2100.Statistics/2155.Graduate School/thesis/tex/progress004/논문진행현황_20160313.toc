@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {.1}개요}{2}
+\contentsline {section}{\numberline {.2}로지스틱 회귀 모형}{2}
+\contentsline {section}{\numberline {.3}추정된 밀도 필터링(Assumed-density filtering)}{3}
+\contentsline {section}{\numberline {.4}일반화 선형 모형에서의 가우시안 근사}{4}
+\contentsline {section}{\numberline {.5}자료 설명}{6}
+\contentsline {section}{\numberline {.6}광고 클릭률 온라인 예측}{7}

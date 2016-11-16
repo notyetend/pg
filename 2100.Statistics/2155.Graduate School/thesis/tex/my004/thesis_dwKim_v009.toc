@@ -1,0 +1,13 @@
+\contentsline {chapter}{\numberline {제\nobreakspace {}1\nobreakspace {}장}서론}{2}
+\contentsline {section}{\numberline {1.}개요}{2}
+\contentsline {chapter}{\numberline {제\nobreakspace {}2\nobreakspace {}장}가우시안 구적법을 이용한 온라인 베이지안 로지스틱 회귀 모형}{5}
+\contentsline {section}{\numberline {1.}로지스틱 회귀 모형}{5}
+\contentsline {section}{\numberline {2.}추정된 밀도 필터링(Assumed-density filtering)}{6}
+\contentsline {section}{\numberline {3.}일반화 선형 모형에서의 가우시안 근사}{7}
+\contentsline {section}{\numberline {4.}Hashing trick}{9}
+\contentsline {chapter}{\numberline {제\nobreakspace {}3\nobreakspace {}장}모의 실험 및 실제 자료 적용}{11}
+\contentsline {section}{\numberline {1.}모의 실험}{11}
+\contentsline {section}{\numberline {2.}사례 데이터 분석}{11}
+\contentsline {subsection}{\numberline {\indent 2.1.}타이타닉 탑승자 자료}{11}
+\contentsline {subsection}{\numberline {\indent 2.2.}온라인 광고 자료}{12}
+\contentsline {chapter}{\numberline {제\nobreakspace {}4\nobreakspace {}장}결론}{14}
