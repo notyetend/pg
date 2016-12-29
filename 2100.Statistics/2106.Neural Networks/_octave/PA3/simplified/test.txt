@@ -1,0 +1,36 @@
+clear
+source('a3_s.m')
+
+n_hid = 7;
+n_input_units = 3;
+n_output_units = 5;
+n_params = (n_input_units + n_output_units) * n_hid;
+as_row_vector = cos(0:(n_params-1));
+theta = as_row_vector(:) * 0.1;
+from_data_file = load('data.mat');
+datas = from_data_file.data;
+n_training_cases = size(datas.training.inputs, 2);
+model = initial_model(n_hid);
+
+wd_coefficient = 1;
+data = datas.training;
+
+base_theta = model_to_theta(model);
+h = 1e-2;
+correctness_threshold = 1e-5;
+analytic_gradient = model_to_theta(d_loss_by_d_model(model, data, wd_coefficient));
+i = 1;
+test_index = mod(i * 1299721, size(base_theta,1)) + 1; %test_index = 18
+analytic_here = analytic_gradient(test_index);
+
+
+
+
+theta_step = base_theta * 0;
+theta_step(test_index) = h;
+contribution_distances = [-4:-1, 1:4];
+contribution_weights = [1/280, -4/105, 1/5, -4/5, 4/5, -1/5, 4/105, -1/280];
+temp = 0;
+for contribution_index = 1:8,
+temp = temp + loss(theta_to_model(base_theta + theta_step * contribution_distances(contribution_index)), data, wd_coefficient) * contribution_weights(contribution_index);
+
