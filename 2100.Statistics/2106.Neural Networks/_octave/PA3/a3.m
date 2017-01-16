@@ -144,8 +144,46 @@ function ret = d_loss_by_d_model(model, data, wd_coefficient)
   % The returned object is supposed to be exactly like parameter <model>, i.e. it has fields ret.input_to_hid and ret.hid_to_class. However, the contents of those matrices are gradients (d loss by d model parameter), instead of model parameters.
 	 
   % This is the only function that you're expected to change. Right now, it just returns a lot of zeros, which is obviously not the correct output. Your job is to replace that by a correct computation.
-  ret.input_to_hid = model.input_to_hid * 0;
-  ret.hid_to_class = model.hid_to_class * 0;
+  
+  %% My solution > 
+  % Forward - 1. Input(Z1)
+  % data.inputs
+  
+  % Forward - 2. Input to hidden layer(Z2)
+  inputs_to_hidden_units = model.input_to_hid * data.inputs;
+  
+  % Forward - 3. Hidden layer state(A2)
+  hidden_layer_state = 1 ./ (1 + exp(-inputs_to_hidden_units));
+  
+  % Forward - 4. Input to outout layer(Z3)
+  inputs_to_softmax = model.hid_to_class * hidden_layer_state;
+  
+  
+  % Forward - 5. Compute exp.
+  output_layer_state = exp(inputs_to_softmax);
+
+  % Forward - 6. Normalize to get probability distribution.
+  output_layer_state = output_layer_state ./ repmat(...
+  sum(output_layer_state, 1), 10, 1);
+  
+  % Backward - 1. Compute derivative of cross-entropy loss function.
+  error_deriv = output_layer_state - data.targets;
+  
+  % Backward - 2.
+  hid_to_output_weights_gradient = hidden_layer_state * error_deriv';
+  
+  % Backward - 3.
+  back_propagated_deriv_1 = (model.hid_to_class' * error_deriv) ...
+      .* hidden_layer_state .* (1 - hidden_layer_state);
+  
+  % Backward - 4.
+  embed_to_hid_weights_gradient = data.inputs * back_propagated_deriv_1';
+  
+  %ret.input_to_hid = model.input_to_hid * 0;
+  ret.input_to_hid = embed_to_hid_weights_gradient' + model.input_to_hid * wd_coefficient;
+  %ret.hid_to_class = model.hid_to_class * 0;
+  ret.hid_to_class = hid_to_output_weights_gradient' + model.hid_to_class * wd_coefficient;
+  
 end
 
 function ret = model_to_theta(model)
