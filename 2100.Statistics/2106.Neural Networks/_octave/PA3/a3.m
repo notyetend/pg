@@ -148,6 +148,7 @@ function ret = d_loss_by_d_model(model, data, wd_coefficient)
   %% My solution > 
   % Forward - 1. Input(Z1)
   % data.inputs
+  m = size(data.inputs, 2);
   
   % Forward - 2. Input to hidden layer(Z2)
   inputs_to_hidden_units = model.input_to_hid * data.inputs;
@@ -180,9 +181,9 @@ function ret = d_loss_by_d_model(model, data, wd_coefficient)
   embed_to_hid_weights_gradient = data.inputs * back_propagated_deriv_1';
   
   %ret.input_to_hid = model.input_to_hid * 0;
-  ret.input_to_hid = embed_to_hid_weights_gradient' + model.input_to_hid * wd_coefficient;
+  ret.input_to_hid = (1 / m) .* embed_to_hid_weights_gradient' + model.input_to_hid * wd_coefficient;
   %ret.hid_to_class = model.hid_to_class * 0;
-  ret.hid_to_class = hid_to_output_weights_gradient' + model.hid_to_class * wd_coefficient;
+  ret.hid_to_class = (1 / m) .* hid_to_output_weights_gradient' + model.hid_to_class * wd_coefficient;
   
 end
 
