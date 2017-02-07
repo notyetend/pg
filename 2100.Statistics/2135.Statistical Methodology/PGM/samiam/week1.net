@@ -1,0 +1,93 @@
+net
+{
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@16e1a437";
+	huginenginegenerator3061656038650325130L = "edu.ucla.belief.inference.JoinTreeSettings@bb313fc";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@66abb116";
+	node_size = (130 55);
+}
+
+node Accident
+{
+	states = ("Severe" "Mild" "None" );
+	position = (235 -322);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable1";
+	label = "Accident";
+	excludepolicy = "include whole CPT";
+}
+node Vehicle_year
+{
+	states = ("After2000" "Before2000" );
+	position = (53 -138);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable2";
+	label = "Vehicle_year";
+	excludepolicy = "include whole CPT";
+}
+node Vehicle_size
+{
+	states = ("Compact" "SUV" );
+	position = (305 -133);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable3";
+	label = "Vehicle_size";
+	excludepolicy = "include whole CPT";
+}
+node Driver_quality
+{
+	states = ("Good" "Bad" );
+	position = (525 -139);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable4";
+	label = "Driver_quality";
+	ishiddenvariable = "true";
+	excludepolicy = "include whole CPT";
+}
+node Cost
+{
+	states = ("Low" "High" );
+	position = (236 -489);
+	diagnosistype = "AUXILIARY";
+	DSLxSUBMODEL = "Root Submodel";
+	ismapvariable = "false";
+	ID = "variable0";
+	label = "Cost";
+	excludepolicy = "include whole CPT";
+}
+potential ( Accident | Vehicle_year Vehicle_size Driver_quality )
+{
+	data = ((((	0.01	0.09	0.9	)
+		(	0.01	0.09	0.9	))
+		((	0.01	0.09	0.9	)
+		(	0.01	0.09	0.9	)))
+		(((	0.01	0.09	0.9	)
+		(	0.01	0.09	0.9	))
+		((	0.01	0.09	0.9	)
+		(	0.01	0.09	0.9	))));
+}
+potential ( Vehicle_year | )
+{
+	data = (	0.6	0.4	);
+}
+potential ( Vehicle_size | )
+{
+	data = (	0.65	0.35	);
+}
+potential ( Driver_quality | )
+{
+	data = (	0.8	0.2	);
+}
+potential ( Cost | Accident )
+{
+	data = ((	0.1	0.9	)
+		(	0.4	0.6	)
+		(	0.95	0.05	));
+}
