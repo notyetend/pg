@@ -33,7 +33,7 @@ def get_random_b_W(n_l_prev, n_l):
     return b_l, W_l
 
 
-def backward_propagation(dA_l, A_l_prev, W_l, Z_l, g_l):
+def backward_propagation(A_l_prev, W_l, Z_l, g_l, dA_l):
     m = dA_l.shape[1]
     assert (m == Z_l.shape[1])
 
@@ -45,12 +45,26 @@ def backward_propagation(dA_l, A_l_prev, W_l, Z_l, g_l):
     return dA_l_prev, dW_l, db_l
 
 
+def get_cross_entropy_cost(Y_actual, Y_prediction):
+    assert Y_actual.shape == Y_prediction.shape
+
+    m = Y_actual.shape[1]
+    loss_positive = -1.0 * np.multiply(Y_actual, np.log(Y_prediction))
+    loss_negative = -1.0 * np.multiply((1 - Y_actual), np.log(1 - Y_prediction))
+    cost = np.sum(loss_positive + loss_negative) / m
+
+    return cost
+
+
 class SimpleFfnn:
     def __init__(self, layer_dims, layer_activations, random_seed=None):
-        np.random.seed(random_seed)
+        assert len(layer_dims) == len(layer_activations)
+
+        if random_seed is not None:
+            np.random.seed(random_seed)
 
         self.layer_dims = layer_dims
-        self.layer_activations = layer_activations
+        self.layer_activations = layer_activations  # 0's activation function is not used. so you should pass None for 0'th element
         self.n_L = len(layer_dims) - 1  # input layer is not counted.
         self.cache_A = [None] * (self.n_L + 1)
         self.cache_Z = [None] * (self.n_L + 1)  # cache_Z[0] is not used.
@@ -62,6 +76,9 @@ class SimpleFfnn:
         self.cache_db = [None] * (self.n_L + 1)  # cache_db[0] is not used.
         self.X = None
         self.Y = None
+        self.learning_rate = None
+        self.epoch = 0
+        self.costs = []
         self._initialize_parameters()
 
     def _initialize_parameters(self):
@@ -99,5 +116,51 @@ class SimpleFfnn:
             Z_l = self.cache_Z[i]
             g_l = self.layer_activations[i]
 
-            self.cache_dA[i - 1], self.cache_W[i], self.cache_b[i] = backward_propagation(dA_l, A_l_prev, W_l, Z_l, g_l)
+            self.cache_dA[i - 1], self.cache_dW[i], self.cache_db[i] = backward_propagation(A_l_prev=A_l_prev,
+                                                                                            W_l=W_l,
+                                                                                            Z_l=Z_l,
+                                                                                            g_l=g_l,
+                                                                                            dA_l=dA_l)
+
+    def update_parameters_deep(self, learning_rate):
+        self.learning_rate = learning_rate
+
+        for i in range(1, len(self.layer_dims)):
+            self.cache_W[i] -= learning_rate * self.cache_dW[i]
+            self.cache_b[i] -= learning_rate * self.cache_db[i]
+
+    def training(self, X_train, Y_train, learning_rate=0.1, num_iteration=10):
+        self.epoch += num_iteration
+
+        for i in range(num_iteration):
+            self.forward_propagation_deep(X_train, Y_train)
+
+            cost = get_cross_entropy_cost(Y_train, self.cache_A[-1])
+            self.costs.append(cost)
+
+            self.backward_propagation_deep()
+            self.update_parameters_deep(learning_rate)
+
+    def predict(self, X_test, Y_actual=None):
+        m = X_test.shape[1]
+
+        tmp_cache_A = [X_test]
+
+        for i in range(1, len(self.layer_dims)):  # 1, 2, ..., n_L
+            A_l_prev = tmp_cache_A[i - 1]
+            W_l = self.cache_W[i]
+            b_l = self.cache_b[i]
+            g_l = self.layer_activations[i]
+
+            A_l, _ = forward_propagation(A_l_prev, W_l, b_l, g_l)
+            tmp_cache_A.append(A_l)
+
+        accuracy = None
+        Y_prediction_probability = tmp_cache_A[-1]  # last activation
+        Y_prediction = (Y_prediction_probability >= 0.5).astype(int)
+        if Y_actual is not None:
+            assert X_test.shape[1] == Y_actual.shape[1]
+            accuracy = np.sum((Y_actual == Y_prediction))/m
+
+        return Y_prediction, Y_prediction_probability, accuracy
 
