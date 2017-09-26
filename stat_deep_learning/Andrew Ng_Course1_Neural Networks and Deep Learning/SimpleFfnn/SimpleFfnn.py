@@ -34,6 +34,17 @@ def get_random_b_W(n_l_prev, n_l):
 
 
 def backward_propagation(A_l_prev, W_l, Z_l, g_l, dA_l):
+    """
+
+    :param A_l_prev: activation of previous layer
+    :param W_l: weights of this layer
+    :param Z_l: weighted sum of this layer
+    :param g_l: activation function of this layer
+    :param dA_l: dL/dA_l, derivative of loss wrt activation of this layer
+    :return: dL/dA_l_prev, derivative of loss wrt activation of previous layer
+
+    """
+
     m = dA_l.shape[1]
     assert (m == Z_l.shape[1])
 
