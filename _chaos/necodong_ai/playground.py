@@ -38,7 +38,7 @@ def match(think1, think2):
     old_games_1 = []
     old_games_2 = []
 
-    num_match = 3
+    num_match = 110
     for i in range(1, num_match + 1):  # 1 ~ 11 Matches
         _score = 0
         hands_1 = ['1', '2', '3', '4', '5']
@@ -62,8 +62,10 @@ def match(think1, think2):
 
     # print(score_1, score_2)
 
-    return score_1 / num_match, score_2 / num_match
     '''
+    # return score_1 / num_match, score_2 / num_match
+    '''
+
     if score_1 > score_2:
         # print('Player 1 Wins')
         return -1
@@ -73,7 +75,7 @@ def match(think1, think2):
     else:
         # print('Draw')
         return 0
-    '''
+
 
 
 if __name__ == '__main__':
@@ -101,6 +103,7 @@ if __name__ == '__main__':
     for think1 in func_list:
         func_list_2.remove(think1)
         for think2 in func_list_2:
+            '''
             score1, score2 = match(think1, think2)
             win_score[think1] += score1
             win_score[think2] += score2
@@ -113,7 +116,7 @@ if __name__ == '__main__':
             else:
                 win_score[think1] += 1
                 win_score[think2] += 1
-            '''
+
     print("=== RESULT ===")
     for k, v in dict(win_score).items():
         func_name = func_dict[k]

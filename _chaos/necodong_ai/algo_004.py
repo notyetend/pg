@@ -1,9 +1,4 @@
 def think(hands, history, old_games):
-    import random
-
-    def random_choice(val_list):
-        return val_list[int(random.uniform(0, len(val_list)))]
-
     def get_hand_with_pattern(pattern):
         return pattern[5-len(hands)]
 
@@ -13,10 +8,8 @@ def think(hands, history, old_games):
             rt += str(int(p) % 5 + 1)
         return rt
 
-    num_match = len(old_games) + 1
-
-    if num_match < 3:
-        return random_choice(hands)
+    if len(old_games) == 0:
+        return get_hand_with_pattern('15432')
     else:
         last_game = old_games[-1]
         pattern = ''
