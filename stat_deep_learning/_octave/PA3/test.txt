@@ -1,0 +1,22 @@
+clear
+n_hid = 7
+source("a3_s.m")
+%a3(1, 7, 1, 0.1, 0.3, false, 3)
+
+wd_coefficient = 1
+
+n_iters = 1
+learning_rate = 0.1
+momentum_multiplier = 0.3
+do_early_stopping = false
+mini_batch_size = 3
+
+model = initial_model(n_hid);
+from_data_file = load('data.mat');
+datas = from_data_file.data;
+n_training_cases = size(datas.training.inputs, 2);
+base_theta = model_to_theta(model)
+
+data = datas.training;
+h = 1e-2;
+correctness_threshold = 1e-5;
