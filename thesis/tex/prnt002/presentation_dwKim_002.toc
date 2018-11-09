@@ -1,0 +1,11 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{개요}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{문제점 분석}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{실험 목적}{4}{0}{1}
+\beamer@subsectionintoc {1}{3}{비교 대상 방법론}{5}{0}{1}
+\beamer@sectionintoc {2}{모의 실험}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{모의 데이터}{6}{0}{2}
+\beamer@subsectionintoc {2}{2}{회귀 계수 추정: 최대 우도}{7}{0}{2}
+\beamer@subsectionintoc {2}{3}{모의 실험 결과: $w_0$}{8}{0}{2}
+\beamer@subsectionintoc {2}{4}{모의 실험 결과: $w_1$}{9}{0}{2}
+\beamer@subsectionintoc {2}{5}{모의 실험 결과: 비교}{10}{0}{2}

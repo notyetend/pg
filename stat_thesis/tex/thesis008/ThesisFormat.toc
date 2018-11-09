@@ -1,3 +1,0 @@
-\contentsline {chapter}{\numberline {\ksKSTHE \nobreakspace {}1\nobreakspace {}\kschaptername }끎말}{1}
-\contentsline {section}{\numberline {\ksKSTHE \nobreakspace {}1\nobreakspace {}\kssectionname }베이지안 네트워크}{1}
-\contentsline {chapter}{References}{2}

@@ -1,0 +1,181 @@
+\documentclass[oneside,b5paper,11pt]{book} %book class in 11 points
+\usepackage{geometry} % Package re-sizing page for b5paper
+\usepackage[hangul]{kotex} % Korean support
+\usepackage{natbib} % cite style
+\usepackage{paralist} % package for inline enumerate, i) ii)...
+
+\usepackage{amsmath} % for math symbols
+\usepackage{amssymb} % for math symbols
+
+\kscntformat{section}{}{} % 제 1.1절 -> 1.1
+\renewcommand\thesection{\thechapter.\arabic{section}} % 제 1.1절 -> 1.1
+
+%%들여쓰기
+\usepackage{indentfirst}
+\setlength\parindent{2.0em}
+
+
+
+\title{가우시안 구적법을 이용한 온라인 베이지안 로지스틱 회귀 모형에 관한 연구}
+\author{김동완}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{서론}
+
+\section{개요}
+ 모수에 대한 학습(learning)이나 추론(inference)를 진행할 때 데이터의 크기가 작거나 데이터의 수집으로부터 예측까지 시간적 여유가 있을 경우 데이터 전체를 한꺼번에 활용하는 일괄 처리(batch processing) 방식을 사용한다. 반면 데이터를 한꺼번에 처리하기에 그 크기가 지나치게 크거나 스트리밍(streaming)으로 유입되는 데이터에 대해서 실시간으로 예측을 처리해야 하는 경우 온라인 학습(online learning)을 사용해야 할 필요성이 있다.\citep{Opper1999} 특히 온라인 학습에 있어서 베이지안 방법론을 이용한 접근은 \citet{Opper1996} 가 제안하였다. 본 논문에서는 추정된 밀도 필터링(Assumed-density filtering, ADF)방법을 이용한 베이지안 온라인 학습 기법에 대해서 고찰해보도록 한다.
+ 
+%
+% Chapter 1
+%정
+\chapter{가우시안 구적법을
+ 이용한 온라인 베이지안 로지스틱 회귀 모형}
+ 
+% Section 1-
+\section{로지스틱 회귀 모형}
+
+일반화 선형 모형은 크게 
+\begin{inparaenum}[i)]
+\item 반응변수 $Y$와 그것의 확률 분포,\quad
+\item 설명변수와 회귀계수의 선형식(systematic component), $\eta = \theta^T x$, \quad
+\item 연결함수(link function), $g(\cdot)$ 로 구성된다.
+\end{inparaenum} 이 3가지 구성요소는 아래와 같이 '반응변수 $Y$의 기댓값 $\mu$와 선형식 $\eta$의 관계가 연결함수로 표현되는 형태로 결합된다.\citep{Agresti1996}
+$$E(Y) = \mu = g^{-1}(\theta^T x)$$
+
+ 로지스틱 회귀 모형은 일반화 선형 모형의 한 가지 형태로서 반응변수 $Y$가 이항분포를 따르고 연결함수가 
+$$
+g(\mu) = logit(\mu) =log \left(\frac{\mu}{1-\mu}\right)
+$$
+위와 같은 log-odds(logit)인 경우를 말한다.
+
+결국 반응변수 $Y$는 성공확률 $\pi$가 $g^{-1}(\theta^T x)$인 이항분포로서, 아래와 같이 $\pi$를 회귀계수 혹은 가중치(weight)와 설명변수의 선형결합을 인자로 하는 로지스틱(logistic, sigmoid) 함수로 표현할 수 있다.
+$$
+\pi_i = P(y_i=1) = \frac{1}{1+exp(-\theta_i^T x_i)}
+$$
+
+\begin{eqnarray}
+    {}logit(E[Y])  
+  &=& logit(P(Y=1))  \\
+  &=& logit(\pi(x))  \\  
+  &=& log \left( \frac{\pi(x)}{1-\pi(x)}\right) \\
+  &=& \theta^T x
+\end{eqnarray}
+
+
+% Section 1-
+\section{추정된 밀도 필터링(Assumed-density filtering)}
+ 추정된 밀도 필터링(Assumed-density filtering, ADF)는 베이지안 네트워크 혹은 여타의 통계 모형에서 사후분포를 근사적으로 계산하는 방법으로서 통계학에는 \citet{Lauritzen1992}에서 제안된 바 있다. 또한 분야에 따라 "추정된 밀도 필터링(Assumed-density filtering)", "온라인 베이지안 학습(On-line Bayesian learning)", "적률 대응(Moment matching)", "약한 주변화(Weak marginalization)"이라 부르기도 한다. \citep{Minka2013}
+
+ ADF에서는 사후분포를 가우시안과 같은 특정 분포로 근사하는 방법으로서 예측-갱신-투영(predict-update-project)과정을 반복한다. 예측(predict) 과정에서는 모수 $\theta$에 대한 $t-1$ 시점의 사전분포, $q_{t-1}(\theta_{t-1})$와 $t$시점의 관측치를 이용하여 이후 시점 $t$에서의 $\theta$에 대한 사후예측분포, $q_{t|t-1}(\theta_{t})$를 구하고, 갱신(update) 과정에서는 앞서 구한 사전분포와 사후예측분포를 이용하여 $\theta$에 대한 사후분포, $\hat{p}(\theta_t)$를 구한다. 마지막으로 이 사후 분포가 다루기 쉬운 형태가 아닌 경우가 빈번하기 때문에 다루기 쉬운 분포로 투영(project)하는 과정을 거치게 된다.
+
+\begin{itemize}
+\item 근사 사전분포: 
+$$q_{t-1}(\theta_{t-1}) \approx p(\theta_{t-1}|y_{1:t-1})$$
+\item 1단계 사후예측분포: 
+$$q_{t|t-1}(\theta_t) = \int p(\theta_t | \theta_{t-1}) q_{t-1}(\theta_{t-1}) d\theta_{t-1}$$
+\item 사후분포:
+$$\hat{p}(\theta_t) = \frac{1}{Z_t}p(y_t | \theta_t)q_{t|t-1}(\theta_t)$$
+\item 정규화 상수(normalizing constant):
+$$Z_t = \int p(y_t | \theta_{t-1})q_{t|t-1}(\theta_{t})d\theta_{t}$$
+\item 근사 사후분포:
+$$q(\theta_t) = \arg\min_{q \in Q} \mathrm{KL}(\hat{p}(\theta_t || q(\theta_t)) $$
+\end{itemize}
+
+근사 사후분포를 구할 때 위와 같이 쿨백-라이블러 발산값(Kullback-Leibler divergence)을 최소화하는 함수 $q(\theta_t)$를 구하는데 이는 (다루기 어려운)사후분포$\hat{p}(\theta_t)$를 다루기 쉬운 분포 공간으로 투영(project)하는 것이라 생각할 수 있다. 그런데 투영하려는 분포 $q$가 지수족에 속할 경우 단순히 적률 대응(moment matching)만으로 $q(\theta_t)$를 구할수 있다.\citep{Murphy2012}
+
+
+% Section 1-
+\section{일반화 선형 모형에서의 가우시안 근사}
+편의를 위해 설명변수와 회귀계수의 선형식(systematic component)을 $s_t=\theta_t^T x_t$라 하자. 만약 $\theta_t$에 대한 1단계 사후예측분포, $q_{t|t-1}(\theta_t)$가 $\prod_i N(\theta_{t,i};\mu_{t|t-1,i},\sigma^2_{t|t-1,i})$라면 $s_t$의 사후 예측분포, $q_{t|t-1}(s_t)$ 는 아래와 같다.
+\begin{eqnarray}
+   q_{t|t-1}(s_{t}) &\equiv& N(s_t;m_{t|t-1}, {v}_{t|t-1})
+\\ m_{t|t-1} &=& \sum^N_{i=1}x_{t,i}\mu_{t|t-1,i}
+\\ {v}_{t|t-1} &=& \sum^N_{i=1}x^2_{t,i}{\sigma}^2_{t|t-1,i}
+\end{eqnarray}
+
+이때 $s_t$의 사후분포, $q_t(s_t)$는 아래와 같다.
+\begin{eqnarray}
+q_t(s_t) &\equiv& N(s_t; m_t, v_t)
+\\ m_t &=& \int s_t \frac{1}{z_t} f(y_t|s_t) q_{t|t-1}(s_t)ds_t \label{eq:10}
+\\ v_t &=& \int s^2_t \frac{1}{z_t} f(y_t|s_t) q_{t|t-1}(s_t) ds_t - m_t^2 \label{eq:11}
+\\ z_t &=& \int f(y_t|s_t) q_{t|t-1}(s_t)ds_t \label{eq:12}
+\\ f(y_t|s_t) &\equiv& Ber(y_t;\pi = sigmoid(s_t))
+\\ & =& \pi^{y_t} (1-\pi)^{(1-y_t)}, \quad y_t \in \{0,1\}
+\\ & =& \left(\frac{1}{1+exp(-s_t)}\right)^{y_t} \left(\frac{exp(-s_t)}{1+exp(-s_t)}\right)^{(1-y_t)}, \quad y_t \in \{0,1\} \nonumber
+\end{eqnarray}
+
+위의 적분식을 계산하기 위하여 가우시안 구적법(Gaussian quadrature)을 사용할 수 있다. 가우시안 구적법을 이용하면 어떤 다항식과 알려진 함수 $W(x)$의 곱에 대한 계산을 아래와 같이 다항식 함수값의 가중합으로 근사할 수 있다.$$\int^b_a W(x)f(x)dx \approx \sum^N_{j=1}w_j f(x_j)$$
+특히 $W(x)=e^{-x^2}$와 어떤 함수의 곱을 적분하는 경우, $\int^{+\infty}_{-\infty}e^{-x^2}f(x)dx$, 가우스-에르미트 구적법(Gauss-Hermite quadrature)을 사용할 수 있다. $\chi'$를 결정점(sample point)이라 하고 $\omega'$를 가중치(weight)라고 할때,  $\chi=\chi'\sqrt{2}\sigma_{s_t}+\mu_{s_t}$와 $\omega_i = \frac{\omega'}{\sqrt{\pi}}$로 변수변환할 수 있다. 이를 이용하여 앞서 \ref{eq:10}, \ref{eq:11}, \ref{eq:12}의 적분을 아래와 같이 근사할 수 있다.\citep{Zoeter2007}
+
+\begin{eqnarray}
+q_t(s_t) &=& N(s_t; \tilde{m}_t, \tilde{v}_t)
+\\ \tilde{m}_t &=& \frac{1}{\tilde{z}_t} \sum_i \chi_i f(y_t; \chi_i ) \omega_i
+\\ \tilde{v}_t &=& \frac{1}{\tilde{z}_t} \sum_i \chi^2_i f(y_t; \chi_i ) \omega_i - \tilde{m}^2_t
+\\ \tilde{z}_t &=& \sum_i f(y_t; \chi_i ) \omega_i
+\end{eqnarray}
+
+이렇게 구한 $s_t$의 사후분포를 이용하여 $\theta$의 근사 사후분포,  $q(\theta_t)$를 구할 수 있다. $q_{t|t-1}(s_{t-1})$을 $q_{t}(s_t)$로 갱신한 후 평균과 분산의 변화를 각각 $\sigma_m = m_t - m_{t|t-1}$과 $\sigma_v = v_t - v_{t|t-1}$라고 하면, $t$시점의 $i$번째 $\theta$의 분포는 아래와 같다.\citep{Murphy2012}
+\begin{eqnarray}
+   q(\theta_t,i) &\sim& N(\theta_{t,i};\mu_{t,i}, \sigma^2_{t,i})
+\\ \mu_{t,i} &=& \mu_{t|t-1,i} + a_i \delta_m
+\\ \sigma^2_{t,i} &=& \sigma^2_{t|t-1,i} + a^2_i \delta_v
+\\ a_i &\triangleq& \frac{x_{t,i}\sigma^2_{t|t-1,i}}{\sum_j x^2_{t,j}\sigma^2_{t|t-1,i}}
+\end{eqnarray}
+
+
+
+%
+% Chapter 2
+%
+\chapter{모의 실험}
+
+
+%
+% Chapter 3
+%
+\chapter{사례 연구}
+
+\section{자료 설명}
+ '온라인 광고'는 '개시자'(광고 대행)가 웹사이트에 이미지나 텍스트 혹은 복합된 형태의 광고물을 개시하고 '광고주'가 이에 대한 댓가를 지불하는 형태로 이루어진다. 광고에 대한 비용 책정의 방법은 크게
+ \begin{inparaenum}[i)]
+ \item 광고 노출 횟수에 따른 과금(cost-per-impression, CPM),
+ \item 광고 클릭으로 광고주의 웹사이트에 방문한 횟수에 따른 과금(cost-per-click, CPC),
+ \item 광고 클릭 후 광고주의 웹사이트에서 구매 등의 특정 행위를 한 횟수에 따른 과금(cost-per-conversion, CPM) 으로 나뉜다.
+ \end{inparaenum}
+ 광고주는 세가지 방법 중 고객이 실제 매출에 영향을 줄 수 있는 경우를 직접적으로 반영하는 CPC 혹은 CPM를 선호한다. 따라서 광고에 앞서 고객의 광고 클릭 혹은 이후 행위에 영향을 주는 많은 요인들에 따른 광고 클릭률을 예측하는 것이 중요한 문제일 수 밖에 없다.\citep{Chapelle2013}
+ 
+ 실제 온라인 광고의 클릭률 예측에 사용되는 데이터는 그 건수나 변수의 갯수가 상당히 크기 때문에 일괄처리(batch) 방식으로 처리하기 어렵기 때문에 '온라인 학습'이 필요한 경우라고 할 수 있다. 사례 분석을 위해 Criteo\footnote{www.criteo.com, 2005년 설립된 온라인 광고 회사}에서 'Kaggle 대회'\footnote{www.kaggle.com 에서 진행하는 데이터 예측 분석 경연 대회}를 위해 공개한 4천 5백만건 상당의 온라인 광고 데이터\footnote{http://labs.criteo.com/downloads/2014-kaggle-display-advertising-challenge-dataset/}를 사용하였다.
+   
+\section{광고 클릭률 온라인 예측}
+
+%
+% Chapter 3
+%
+\chapter{결론}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%
+% Reference
+%
+\bibliographystyle{apalike}
+\bibliography{thesis_dwKim_references}
+
+\end{document}

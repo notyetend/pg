@@ -1,0 +1,82 @@
+\begin{thebibliography}{}
+
+\bibitem[Agresti, 1996]{Agresti1996}
+Agresti, A. (1996).
+\newblock {\em {An introduction to categorical data analysis}}.
+\newblock Wiley, 2nd edition.
+
+\bibitem[Bottou, 2010]{Bottou2010}
+Bottou, L. (2010).
+\newblock {Large-Scale Machine Learning with Stochastic Gradient Descent}.
+\newblock {\em Proceedings of COMPSTAT'2010}, pages 177--186.
+
+\bibitem[Chapelle et~al., 2013]{Chapelle2013}
+Chapelle, O., Manavoglu, E., and Rosales, R. (2013).
+\newblock {Simple and scalable response prediction for display advertising}.
+\newblock Technical Report 212.
+
+\bibitem[He et~al., 2014]{He2014}
+He, X., Bowers, S., Candela, J.~Q., Pan, J., Jin, O., Xu, T., Liu, B., Xu, T.,
+  Shi, Y., Atallah, A., and Herbrich, R. (2014).
+\newblock {Practical Lessons from Predicting Clicks on Ads at Facebook}.
+\newblock {\em Proceedings of 20th ACM SIGKDD Conference on Knowledge Discovery
+  and Data Mining - ADKDD'14}, pages 1--9.
+
+\bibitem[Herbrich et~al., 2006]{Herbrich2006}
+Herbrich, R., Minka, T., and Graepel, T. (2006).
+\newblock {TrueSkill: A Bayesian Skill Rating System}.
+\newblock {\em Advances in Neural Information Processing Systems}, pages
+  569--576.
+
+\bibitem[Julier and Uhlmann, 1997]{Julier1997}
+Julier, S.~J. and Uhlmann, J.~K. (1997).
+\newblock {A new extension of the Kalman filter to nonlinear systems}.
+\newblock {\em Int Symp AerospaceDefense Sensing Simul and Controls},
+  3:182--193.
+
+\bibitem[Kalman, 1960]{Kalman1960}
+Kalman, R. (1960).
+\newblock {A new approach to linear filtering and prediction problems}.
+\newblock {\em Journal of basic Engineering}, 82(1):35--45.
+
+\bibitem[Lauritzen, 1992]{Lauritzen1992}
+Lauritzen, S. L. U. o.~A. (1992).
+\newblock {Propagation of Probabilities, Means and Variances in Mixed Graphical
+  Association Models}.
+
+\bibitem[Minka, 2013]{Minka2013}
+Minka, T.~P. (2013).
+\newblock {Expectation Propagation for approximate Bayesian inference}.
+\newblock {\em Statistics}, 17(2):362--369.
+
+\bibitem[Murphy, 2012]{Murphy2012}
+Murphy, K.~P. (2012).
+\newblock {\em {Machine learning}}.
+\newblock The MIT Press.
+
+\bibitem[Opper, 1996]{Opper1996}
+Opper, M. (1996).
+\newblock {On-line versus Off-line Learning from Random Examples: General
+  Results}.
+\newblock {\em Physical Review Letters}, 77:4671--4674.
+
+\bibitem[Ramadhian, 2013]{Ramadhian2013}
+Ramadhian, F.~H. (2013).
+\newblock {Performance Analysis of Bloom Filter with Various Hash Functions on
+  Spell Checker}.
+
+\bibitem[Runge et~al., 2014]{Runge2014}
+Runge, J., Gao, P., Garcin, F., and Faltings, B. (2014).
+\newblock {Churn prediction for high-value players in casual social games}.
+\newblock {\em IEEE Conference on Computatonal Intelligence and Games, CIG}.
+
+\bibitem[Smith et~al., 1962]{Smith1962}
+Smith, G.~L., McGee, L.~A., and Schmidt, S.~F. (1962).
+\newblock {Application of Statistical Filter Theory to the Optimal Estimation
+  of Position and Velocity on Board a Circumlunar Vehicle}.
+
+\bibitem[Zoeter, 2007]{Zoeter2007}
+Zoeter, O. (2007).
+\newblock {Bayesian Generalized Linear Models in a Terabyte World.}
+
+\end{thebibliography}
