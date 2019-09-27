@@ -1,3 +1,0 @@
-\contentsline {chapter}{\numberline {제\nobreakspace {}1\nobreakspace {}장}끎말}{1}
-\contentsline {section}{\numberline {제\nobreakspace {}1\nobreakspace {}절}베이지안 네트워크}{1}
-\contentsline {chapter}{References}{2}
